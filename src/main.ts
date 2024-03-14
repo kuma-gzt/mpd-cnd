@@ -1,9 +1,6 @@
 "use strict";
 
 import "./style.css";
-//import { scale_, output } from "./map2canvas.ts";
-//import { getXyhk, getPreDrawingPoints, getDrawingPoints } from "./map2canvas.ts";
-//import { getScale } from "./map_proj_equations.ts";
 import { getCanvasCoords } from "./map2canvas.ts";
 
 window.addEventListener("load", eventWindowLoaded, false);

@@ -78,7 +78,7 @@ function getCanvasCoords(projName: string) {
   }
 
   const xyhk = getXyhk();
-  const scale = getScale(xyhk, projName);
+  const scale = getScale(projName);
   const mapPoints = getMapPoints(xyhk, scale);
   const canvasPoints = getCanvasPoints(mapPoints);
 
