@@ -23,7 +23,7 @@ function utm_lonlat2xy(
   lat_: number,
   lon_orig: number,
   lat_orig: number
-) {
+): XYHK {
   const lat = toRadians(lat_);
   const lon = toRadians(lon_);
   const latO = toRadians(lat_orig);
@@ -92,7 +92,7 @@ function utm_lonlat2xy(
  * @param utmZone
  * @return origin longitude in degrees
  */
-function getLonOriginUTM(utmZone: string) {
+function getLonOriginUTM(utmZone: string): number {
   let lonOrig: number;
 
   switch (utmZone) {
