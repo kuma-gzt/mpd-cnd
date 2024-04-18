@@ -2,6 +2,7 @@
 
 import { geogCoord } from "./canvec_15.ts";
 import { lonlat2xy, getScale } from "./map_proj_equations.ts";
+import { getXYShift } from "./util_functions.ts";
 
 interface XYHK {
   x: number;
@@ -19,8 +20,8 @@ type XYHKArray = XYHK[];
  * @param projName projection name
  * @return the canvas point coordinates
  */
-function getCanvasCoords(projName: string) {
-  // min and max map coordinates
+function getCanvasCoords(lat1: number, lat2: number) {
+  // min x, y map coordinates
   let minX = Number.MAX_VALUE;
   let minY = Number.MAX_VALUE;
 
@@ -37,7 +38,7 @@ function getCanvasCoords(projName: string) {
     // using traditional for loop for better perfomance
     const lonlatLength = lonlat.length;
     for (let i = 0; i < lonlatLength; i++) {
-      xyhk.push(lonlat2xy(lonlat[i], projName));
+      xyhk.push(lonlat2xy(lonlat[i], lat1, lat2));
     }
 
     return xyhk;
@@ -87,7 +88,9 @@ function getCanvasCoords(projName: string) {
       // using traditional for loop for better perfomance
       const arrLength = arr.length;
       for (let j = 0; j < arrLength; j++) {
-        tmp.push([arr[j][0] + tx + 15, arr[j][1] + ty + 15]);
+        //const shifts = getXYShift(projName);
+        //tmp.push([arr[j][0] + tx + shifts[0], arr[j][1] + ty + shifts[1]]);
+        tmp.push([arr[j][0] + tx, arr[j][1] + ty]);
       }
       canvasPoints.push(tmp);
     }
@@ -96,7 +99,7 @@ function getCanvasCoords(projName: string) {
   }
 
   const xyhk = getXyhk();
-  const scale = getScale(projName);
+  const scale = getScale(lat1, lat2);
   const mapPoints = getMapPoints(xyhk, scale);
   const canvasPoints = getCanvasPoints(mapPoints);
 
