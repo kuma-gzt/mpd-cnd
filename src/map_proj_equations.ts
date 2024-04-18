@@ -1,7 +1,9 @@
 "use strict";
 
 import { APP_CONS, BOUND_CONS } from "./constants.ts";
-import { utm_lonlat2xy, getLonOriginUTM } from "./utm_proj.ts";
+//import { utm_lonlat2xy, getLonOriginUTM } from "./utm_proj.ts";
+import { lcc_lonlat2xy } from "./lcc_proj.ts";
+
 
 interface XYHK {
   x: number;
@@ -23,27 +25,25 @@ type XYHKArray = XYHK[];
 /**
  * Calculates the x-y coordinates and h-k factors from lon-lat coordinates
  * @param lonlatArray array of lons and lats
- * @param projName projection name
+ * @param lat1 first latitude
+ * @param lat2 second latitude
  * @return an array holding the x, y, h and k values
  */
-function lonlat2xy(lonlatArray: ArrCoords, projName: string): XYHKArray {
+function lonlat2xy(lonlatArray: ArrCoords, lat1: number, lat2: number): XYHKArray {
   const xyhkArray: XYHKArray = [];
 
-  if (projName.includes("UTM")) {
-    const lat_orig = 0; // origin latitude is always at the equator, hence lat_orig is zero
-    const lon_orig = getLonOriginUTM(projName);
-
-    // using traditional for loop for better perfomance
-    const arrLength = lonlatArray.length;
-    for (let i = 0; i < arrLength; i++) {
-      let xyhk: XYHK = utm_lonlat2xy(
-        lonlatArray[i][0],
-        lonlatArray[i][1],
-        lon_orig,
-        lat_orig
-      );
-      xyhkArray.push(xyhk);
-    }
+  // using traditional for loop for better perfomance
+  const arrLength = lonlatArray.length;
+  for (let i = 0; i < arrLength; i++) {
+    let xyhk: XYHK = lcc_lonlat2xy(
+      lonlatArray[i][0],
+      lonlatArray[i][1],
+      -91.8666666666667,
+      63.390675,
+      lat1,
+      lat2
+    );
+    xyhkArray.push(xyhk);
   }
 
   return xyhkArray;
@@ -51,35 +51,34 @@ function lonlat2xy(lonlatArray: ArrCoords, projName: string): XYHKArray {
 
 /**
  * Calculates the max and min x-y coordinates
- * @param projName projection name
- * @return a map holding the min and max x, y coordinates
+ * @param lat1 first latitude
+ * @param lat2 second latitude
+ * @return an object holding the min and max x, y coordinates
  */
-function getCoordMinMax(projName: string): MinMax {
+function getCoordMinMax(lat1: number, lat2: number): MinMax {
   const xyMinMax: MinMax = {};
-  if (projName.includes("UTM")) {
-    // for UTM projections origin latitude is always at the equator,
-    // hence lat_orig is zero
-    const lat_orig = 0;
-    const lon_orig = getLonOriginUTM(projName);
 
-    const minXY = utm_lonlat2xy(
-      BOUND_CONS.minLon,
-      BOUND_CONS.minLat,
-      lon_orig,
-      lat_orig
-    );
-    xyMinMax.minX = minXY.x;
-    xyMinMax.minY = minXY.y;
+  const minXY = lcc_lonlat2xy(
+    BOUND_CONS.minLon,
+    BOUND_CONS.minLat,
+    -91.8666666666667,
+    63.390675,
+    lat1,
+    lat2
+  );
+  xyMinMax.minX = minXY.x;
+  xyMinMax.minY = minXY.y;
 
-    const maxXY = utm_lonlat2xy(
-      BOUND_CONS.maxLon,
-      BOUND_CONS.maxLat,
-      lon_orig,
-      lat_orig
-    );
-    xyMinMax.maxX = maxXY.x;
-    xyMinMax.maxY = maxXY.y;
-  }
+  const maxXY = lcc_lonlat2xy(
+    BOUND_CONS.maxLon,
+    BOUND_CONS.maxLat,
+    -91.8666666666667,
+    63.390675,
+    lat1,
+    lat2
+  );
+  xyMinMax.maxX = maxXY.x;
+  xyMinMax.maxY = maxXY.y;
 
   return xyMinMax;
 }
@@ -89,8 +88,8 @@ function getCoordMinMax(projName: string): MinMax {
  * @param projName projection name
  * @return a scale number
  */
-function getScale(projName: string): number {
-  const xyMinMax = getCoordMinMax(projName);
+function getScale(lat1: number, lat2: number): number {
+  const xyMinMax = getCoordMinMax(lat1, lat2);
 
   let minX = xyMinMax.minX;
   let minY = xyMinMax.minY;
