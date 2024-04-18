@@ -1,14 +1,83 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>amp-cnd</title>
-  </head>
-  <body>
-    <canvas id="canvas" width="800" height="800">
-      Canvas not supported
-    </canvas>    
+<head>
+    <meta charset="utf-8" />
+    <title>Map Projection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="fontawesome/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/tooplate-simply-amazed.css" type="text/css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="outer">
+        <header class="header order-last" id="tm-header">
+            <nav class="navbar">
+                <div class="collapse navbar-collapse single-page-nav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://leoguzman.ca/#section-1"><span class="icn"><i class="fas fa-2x fa-air-freshener"></i></span> Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://leoguzman.ca/#section-3"><span class="icn"><i class="far fa-2x fa-images"></i></span> Portfolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://leoguzman.ca/#section-4"><span class="icn"><i class="far fa-2x fa-comments"></i></span> Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <button class="navbar-button collapsed" type="button">
+            <span class="menu_icon">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </span>
+        </button>
+
+        <main id="content-box" class="order-first">
+            <div class="banner-section section parallax-window" data-parallax="scroll" data-image-src="img/section-1-bg.jpg" id="section-1">
+                <div class="container">
+                    <div class="row">
+                      <div class="col">
+                          <h1>Map projection Distortions for Canada</h1>
+                          <p>Map projection Distortions for Canada.</p>                       
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="dropdown">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown button
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                              </div>
+                            </div>
+                            <div>
+                                <label for="customRange" class="form-label">Custom range</label>
+                                <input type="range" class="form-range" id="bootRange" min="7" max="22">
+                            </div>                                                  
+                        </div>
+                        <div class="col">
+                            <canvas id="canvas" width="600" height="504">
+                              Canvas not supported
+                            </canvas>                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script type="module" src="main.ts"></script>
-  </body>
+</body>
 </html>
