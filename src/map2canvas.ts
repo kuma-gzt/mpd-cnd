@@ -30,6 +30,34 @@ function getCanvasCoords(lat1: number, lat2: number) {
   let minX = Number.MAX_VALUE;
   let minY = Number.MAX_VALUE;
 
+  function addIndicatrix() {
+    const geogCoordLength = geogCoord.features.length;
+    geogCoordLength > APP_CONS.geogCoordSize
+      ? (geogCoord.features.length = APP_CONS.geogCoordSize)
+      : undefined;
+
+    const tmp = []
+    for (const lon of APP_CONS.lonRange){
+      for (const lat of APP_CONS.latRange){
+        tmp.push([lon, lat])
+      }
+    }
+
+    // central meridian
+    const indicatrix = {
+      prv: "indicatrix",
+      geom: {
+        coord: [
+          [
+            tmp,
+          ],
+        ],
+      },
+    };
+
+    geogCoord.features.push(indicatrix);
+  }
+
   function addGraticule() {
     const geogCoordLength = geogCoord.features.length;
     geogCoordLength > APP_CONS.geogCoordSize
@@ -43,26 +71,6 @@ function getCanvasCoords(lat1: number, lat2: number) {
         coord: [
           [
             [
-              // [-141, lat1],
-              // [-140, lat1],
-              // [-139, lat1],
-              // [-138, lat1],
-              // [-137, lat1],
-              // [-136, lat1],
-              // [-135, lat1],
-              // [-134, lat1],
-              // [-133, lat1],
-              // [-132, lat1],
-              // [-131, lat1],
-              // [-130, lat1],
-              // [-129, lat1],
-              // [-128, lat1],
-              // [-127, lat1],
-              // [-126, lat1],
-              // [-125, lat1],
-              // [-124, lat1],
-              // [-123, lat1],
-              // [-122, lat1],
               [-121, lat1],
               [-120, lat1],
               [-119, lat1],
@@ -121,17 +129,7 @@ function getCanvasCoords(lat1: number, lat2: number) {
               [-66, lat1],
               [-65, lat1],
               [-64, lat1],
-              [-63, lat1],
-              [-62, lat1],
-              [-61, lat1],
-              [-60, lat1],
-              [-59, lat1],
-              [-58, lat1],
-              [-57, lat1],
-              [-56, lat1],
-              [-55, lat1],
-              [-54, lat1],
-              [-53, lat1],
+              [-63, lat1]
             ],
           ],
         ],
@@ -145,31 +143,6 @@ function getCanvasCoords(lat1: number, lat2: number) {
         coord: [
           [
             [
-              // [-141, lat2],
-              // [-140, lat2],
-              // [-139, lat2],
-              // [-138, lat2],
-              // [-137, lat2],
-              // [-136, lat2],
-              // [-135, lat2],
-              // [-134, lat2],
-              // [-133, lat2],
-              // [-132, lat2],
-              // [-131, lat2],
-              // [-130, lat2],
-              // [-129, lat2],
-              // [-128, lat2],
-              // [-127, lat2],
-              // [-126, lat2],
-              // [-125, lat2],
-              // [-124, lat2],
-              // [-123, lat2],
-              // [-122, lat2],
-              // [-121, lat2],
-              // [-120, lat2],
-              // [-119, lat2],
-              // [-118, lat2],
-              // [-117, lat2],
               [-116, lat2],
               [-115, lat2],
               [-114, lat2],
@@ -218,22 +191,7 @@ function getCanvasCoords(lat1: number, lat2: number) {
               [-71, lat2],
               [-70, lat2],
               [-69, lat2],
-              [-68, lat2],
-              [-67, lat2],
-              [-66, lat2],
-              [-65, lat2],
-              // [-64, lat2],
-              // [-63, lat2],
-              // [-62, lat2],
-              // [-61, lat2],
-              // [-60, lat2],
-              // [-59, lat2],
-              // [-58, lat2],
-              // [-57, lat2],
-              // [-56, lat2],
-              // [-55, lat2],
-              // [-54, lat2],
-              // [-53, lat2],
+              [-68, lat2]              
             ],
           ],
         ],
@@ -268,7 +226,7 @@ function getCanvasCoords(lat1: number, lat2: number) {
     // using traditional for loop for better perfomance
     const geogCoordLength = geogCoord.features.length;
     for (let i = 0; i < geogCoordLength; i++) {
-      const tmp = lonlat2xy(geogCoord.features[i].geom.coord[0][0], lat1, lat2);
+      const tmp = lonlat2xy(geogCoord.features[i].geom.coord[0][0], lat1, lat2);      
 
       // using traditional for loop for better perfomance
       const tmpLength = tmp.length;
