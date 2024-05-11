@@ -16,10 +16,6 @@ interface XYHK_PRV {
   xyhk: XYHK;
 }
 
-type ArrCoords = [number, number];
-
-type XYHKArray = XYHK[];
-
 /**
  * Main function to be exported
  * @param projName projection name
@@ -29,34 +25,6 @@ function getCanvasCoords(lat1: number, lat2: number) {
   // min x, y map coordinates
   let minX = Number.MAX_VALUE;
   let minY = Number.MAX_VALUE;
-
-  function addIndicatrix() {
-    const geogCoordLength = geogCoord.features.length;
-    geogCoordLength > APP_CONS.geogCoordSize
-      ? (geogCoord.features.length = APP_CONS.geogCoordSize)
-      : undefined;
-
-    const tmp = []
-    for (const lon of APP_CONS.lonRange){
-      for (const lat of APP_CONS.latRange){
-        tmp.push([lon, lat])
-      }
-    }
-
-    // central meridian
-    const indicatrix = {
-      prv: "indicatrix",
-      geom: {
-        coord: [
-          [
-            tmp,
-          ],
-        ],
-      },
-    };
-
-    geogCoord.features.push(indicatrix);
-  }
 
   function addGraticule() {
     const geogCoordLength = geogCoord.features.length;
@@ -129,7 +97,7 @@ function getCanvasCoords(lat1: number, lat2: number) {
               [-66, lat1],
               [-65, lat1],
               [-64, lat1],
-              [-63, lat1]
+              [-63, lat1],
             ],
           ],
         ],
@@ -191,7 +159,7 @@ function getCanvasCoords(lat1: number, lat2: number) {
               [-71, lat2],
               [-70, lat2],
               [-69, lat2],
-              [-68, lat2]              
+              [-68, lat2],
             ],
           ],
         ],
@@ -206,7 +174,7 @@ function getCanvasCoords(lat1: number, lat2: number) {
           [
             [
               [MAP_CONS.lccCentralMer, 41],
-              [MAP_CONS.lccCentralMer, 84]
+              [MAP_CONS.lccCentralMer, 84],
             ],
           ],
         ],
@@ -217,8 +185,6 @@ function getCanvasCoords(lat1: number, lat2: number) {
   }
 
   function getXYHK_PRV(): XYHK_PRV[] {
-    const lonlat: ArrCoords[] = [];
-    const xyhk: XYHKArray[] = [];
     const xyhk_prv = [];
 
     addGraticule();
@@ -226,19 +192,19 @@ function getCanvasCoords(lat1: number, lat2: number) {
     // using traditional for loop for better perfomance
     const geogCoordLength = geogCoord.features.length;
     for (let i = 0; i < geogCoordLength; i++) {
-      const tmp = lonlat2xy(geogCoord.features[i].geom.coord[0][0], lat1, lat2);      
+      const tmp = lonlat2xy(geogCoord.features[i].geom.coord[0][0], lat1, lat2);
 
       // using traditional for loop for better perfomance
       const tmpLength = tmp.length;
-      for (let j = 0; j < tmpLength; j++){
-        tmp[j].x = tmp[j].x * APP_CONS.scaleCoeff
-        tmp[j].y = tmp[j].y * APP_CONS.scaleCoeff * -1
+      for (let j = 0; j < tmpLength; j++) {
+        tmp[j].x = tmp[j].x * APP_CONS.scaleCoeff;
+        tmp[j].y = tmp[j].y * APP_CONS.scaleCoeff * -1;
 
         if (tmp[j].x < minX) minX = tmp[j].x;
         if (tmp[j].y < minY) minY = tmp[j].y;
       }
 
-      xyhk_prv.push({prv: geogCoord.features[i].prv, xyhk: tmp});
+      xyhk_prv.push({ prv: geogCoord.features[i].prv, xyhk: tmp });
     }
 
     return xyhk_prv;
@@ -251,11 +217,11 @@ function getCanvasCoords(lat1: number, lat2: number) {
     // using traditional for loop for better perfomance
     const xyhk_prvLength = xyhk_prv.length;
     for (let i = 0; i < xyhk_prvLength; i++) {
-      const tmp_ = xyhk_prv[i].xyhk
+      const tmp_ = xyhk_prv[i].xyhk;
       const tmpLength_ = xyhk_prv[i].xyhk.length;
       for (let j = 0; j < tmpLength_; j++) {
-        tmp_[j].x = tmp_[j].x + tx + APP_CONS.padding
-        tmp_[j].y = tmp_[j].y + ty + APP_CONS.padding
+        tmp_[j].x = tmp_[j].x + tx + APP_CONS.padding;
+        tmp_[j].y = tmp_[j].y + ty + APP_CONS.padding;
       }
     }
 
@@ -264,7 +230,7 @@ function getCanvasCoords(lat1: number, lat2: number) {
 
   const xyhk_prv = getXYHK_PRV();
   const canvasPoints = getXYHK_PRV_Canvas(xyhk_prv);
-  
+
   return canvasPoints;
 }
 
