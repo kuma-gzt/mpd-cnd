@@ -23,7 +23,7 @@ const APP_CONS = {
   geogCoordSize: 116, //115
   padding: 20,
   lonRange: [-141, -133, -125, -117, -109, -101, -93, -85, -77, -69, -61, -53],
-  latRange: [43, 51, 59, 67, 75, 83]
+  latRange: [43, 51, 59, 67, 75, 83],
 };
 
 // boundary constants
@@ -47,7 +47,7 @@ const IDX_COLORS = {
   48: "#cab2d6",
   49: "#6a3d9a",
   50: "#ffff99",
-  51: "#b15928"
+  51: "#b15928",
 };
 
 export { MAP_CONS, APP_CONS, BOUND_CONS, IDX_COLORS };
