@@ -1,4 +1,37 @@
+html,
+body {
+  padding: 0px;
+  margin: 0px;
+  color: #fff;
+  background: #0e1112;
+  overflow-y: scroll;
+}
 
-#canvas {
-  border: 1px solid red;
+#canvas1 {
+  border: 2px solid #cccccc;
+  margin: 10px;
+}
+
+#canvas2 {
+  border: 2px solid #cccccc;
+  margin: 10px;
+}
+
+.banner-section {
+  padding-top: 60px;
+}
+
+.range-class {
+  width: 260px;
+  float: left;
+  padding: 20px;
+}
+
+.range-class-center {
+  display: inline-block
+}
+
+p {
+  text-align: left;
+  margin: 5% 0 5% 0;
 }
