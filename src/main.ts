@@ -23,7 +23,7 @@ function firstLatEvent() {
   firstLat.oninput = function () {
     drawOnScreen(Number(this.value), lat2);
     lat1 = Number(this.value);
-    firstLatLbl.innerText = `Standard parallel #1: ${lat1}° N`;
+    firstLatLbl.innerText = `Frist standard parallel: ${lat1}° N`;
   };
 }
 
@@ -38,7 +38,7 @@ function secondLatEvent() {
   secondLat.oninput = function () {
     drawOnScreen(lat1, Number(this.value));
     lat2 = Number(this.value);
-    secondLatLbl.innerText = `Standard parallel #2: ${lat2.toFixed(0)}° N`;
+    secondLatLbl.innerText = `Second standard parallel: ${lat2.toFixed(0)}° N`;
   };
 }
 
@@ -73,8 +73,8 @@ function drawOnScreen(lat1, lat2) {
   context2.font = "14px sans-serif";
   context2.fillStyle = "white";
   context2.fillText("Scale factors for ", 20, 25);
-  context2.fillText(`standard parallel #1: ${lat1}°`, 20, 45);
-  context2.fillText(`standard parallel #2: ${lat2.toFixed(0)}°`, 20, 65);
+  context2.fillText(`First standard parallel: ${lat1}°`, 20, 45);
+  context2.fillText(`Second standard parallel: ${lat2.toFixed(0)}°`, 20, 65);
 
   // get the canvas coordinates to plot
   const canvasCoords = getCanvasCoords(lat1, lat2);
@@ -128,7 +128,7 @@ function drawOnScreen(lat1, lat2) {
         canvas2Distortion(
           context2,
           IDX_COLORS[j],
-          `k = h = ${tmp[j].h.toFixed(3)}`,
+          `h = k = ${tmp[j].h.toFixed(3)}`,
           tmp[j].h,
           15,
           20,
