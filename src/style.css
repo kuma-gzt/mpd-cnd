@@ -35,3 +35,7 @@ p {
   text-align: left;
   margin: 5% 0 5% 0;
 }
+
+#firstLatLbl, #secondLatLbl {
+  font-size: 0.9em;
+}
