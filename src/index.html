@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>EPSG: 3347 Map Distortions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="img/favicon.png" type="image/png"/>
+    <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap"
@@ -71,8 +71,23 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <h1>Map Distortions for the Statistics Canada Lambert (EPSG:3347)</h1>
-                <p>The <em>Statistics Canada Lambert</em> (EPSG:3347) is a Lambert Conformal Conic map projection adopted by Statistics Canada. It uses two standard parallels, at 49° and 77° N, and the central meridian is located at 91.87° W. The interactive map below attempts to show the map distortions when selecting different values for the standard parallels. The distortions are quantified by showing the Tissot's Indicatrices at regular intervals. Recall that, in conformal map projections, the Tissot's ellipses only change in area, not shape, hence h = k. Because the distortions are rather difficult to asses on the map, a table showing the h and k scales values (and a dynamic bar) are displayed to the right of the map. The source code can be reviewed <a href="https://github.com/kuma-gzt/mpd-cnd">here</a>.</p>
+                <h1>
+                  Map Distortions for the Statistics Canada Lambert (EPSG:3347)
+                </h1>
+                <p>
+                  The <em>Statistics Canada Lambert</em> (EPSG:3347) is a map
+                  projection widely used for mapping the entirety of Canada. The
+                  interactive map below illustrates the impact of varying
+                  standard parallels on the map's distortions through the
+                  display of Tissot's Indicatrices at set intervals. It's
+                  important to note that in conformal map projections like this
+                  one, Tissot's ellipses alter in size but maintain their shape,
+                  meaning the scale factors, h and k, are identical. Adjacent to
+                  the map, a table presents the h and k values alongside a
+                  dynamic bar graph for easy comparison. The source code can be
+                  reviewed
+                  <a href="https://github.com/kuma-gzt/mpd-cnd">here</a>.
+                </p>
               </div>
             </div>
             <div class="row">
@@ -80,13 +95,13 @@
                 <canvas id="canvas1" width="540" height="480">
                   Canvas not supported
                 </canvas>
-                <canvas id="canvas2" width="220" height="480">
+                <canvas id="canvas2" width="225" height="480">
                   Canvas not supported
                 </canvas>
                 <div class="range-class-center">
                   <div class="range-class">
                     <label id="firstLatLbl" for="customRange" class="form-label"
-                      >Standard parallel #1: 49° N</label
+                      >First standard parallel: 49° N</label
                     >
                     <input
                       type="range"
@@ -102,7 +117,7 @@
                       id="secondLatLbl"
                       for="customRange"
                       class="form-label"
-                      >Standard parallel #2: 77° N</label
+                      >Second standard parallel: 77° N</label
                     >
                     <input
                       type="range"
